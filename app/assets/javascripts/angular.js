@@ -17,6 +17,8 @@ app.controller('HeaderController', ['$http', function($http){
 }]);
 
 
+
+
 ////////////////////////////////////////
 /////////// MOOD CONTROLLER ////////////
 ////////////////////////////////////////
@@ -71,7 +73,7 @@ app.controller('FactorController', ['$http', '$scope', function($http, $scope){
 
   // get the factors
   this.getFactor = function(){
-    $http.get('/factors').success(function(data){
+    $http.get('/moods').success(function(data){
       controller.current_user.blurb = data.blurb;
       console.log(data);
     });
@@ -87,8 +89,8 @@ app.controller('FactorController', ['$http', '$scope', function($http, $scope){
       blurb: this.blurb
     });
 
-  // post to /factors
-  $http.post('/factors', {
+  // post to factors to /moods
+  $http.post('/moods', {
     authenticity_token: authenticity_token,
     factor: {
       blurb: this.blurb
