@@ -1,6 +1,6 @@
 <!-- the mood form -->
 <div ng-controller="MoodController as mood">
-<form ng-submit='mood.createMood(happiness)'>
+<form ng-submit='mood.createMood()'>
 
 
   <div id="emotions">
@@ -150,39 +150,48 @@
 </div>
 
 <!-- the factor form -->
+
+<!-- negative factors -->
 <div ng-controller="FactorController as factor" ng-show="mood.happiness == 1 || mood.happiness == 2 || mood.happiness == 3">
-<form ng-submit="factor.createFactor(blurb)">
+  <form ng-submit="factor.createFactor(blurb)">
   Why are you feeling upset?<br/>
-  <input class="blurbbox"
-         type="text"
-         ng-model="factor.blurb"
-         ng-maxlength="140"
-         ng-value="factor.blurb">
-  <input type="submit"
-         value="SUBMIT YOUR MOOD">
+    <input class="blurbbox"
+          type="text"
+          ng-model="factor.blurb"
+          ng-maxlength="140"
+          ng-value="factor.blurb">
+    <input type="submit"
+           value="SUBMIT YOUR MOOD"
+           ng-submit="factor.createFactor(blurb)">
+  </form>
 </div>
 
+<!-- neutral factors -->
 <div ng-controller="FactorController as factor" ng-show="mood.happiness == 4 || mood.happiness == 5 || mood.happiness == 6">
-<form ng-submit="factor.createFactor(blurb)">
+  <form ng-submit="factor.createFactor(blurb)">
   How could your day be better?<br/>
-  <input class="blurbbox"
-         type="text"
-         ng-model="factor.blurb"
-         ng-maxlength="140"
-         ng-value="factor.blurb">
-  <input type="submit"
-         value="SUBMIT YOUR MOOD">
+    <input class="blurbbox"
+           type="text"
+           ng-model="factor.blurb"
+           ng-maxlength="140"
+           ng-value="factor.blurb">
+    <input type="submit"
+           value="SUBMIT YOUR MOOD"
+           ng-submit="factor.createFactor(blurb)">
+  </form>
 </div>
 
+<!-- positive factors -->
 <div ng-controller="FactorController as factor" ng-show="mood.happiness == 7 || mood.happiness == 8 || mood.happiness == 9 || mood.happiness == 10">
-<form ng-submit="factor.createFactor(blurb)">
+  <form ng-submit="factor.createFactor(blurb)">
   What made your day awesome?<br/>
-  <input class="blurbbox"
-         type="text"
-         ng-model="factor.blurb"
-         ng-maxlength="140"
-         ng-value="factor.blurb">
-  <input type="submit"
-         value="SUBMIT YOUR MOOD">
+    <input class="blurbbox"
+           type="text"
+           ng-model="factor.blurb"
+           ng-maxlength="140"
+           ng-value="factor.blurb">
+    <input type="submit"
+           value="SUBMIT YOUR MOOD"
+           ng-submit="factor.createFactor(blurb)">
+    </form>
 </div>
-</form>

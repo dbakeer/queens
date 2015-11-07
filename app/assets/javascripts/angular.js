@@ -34,7 +34,7 @@ app.controller('MoodController', ['$http', function($http){
   // get the happiness value for current user
   this.getMood = function(){
     $http.get('/moods').success(function(data){
-      controller.current_user_happiness = data.mood;
+      controller.current_user_happiness = data.happiness;
     });
   };
 
@@ -44,16 +44,12 @@ app.controller('MoodController', ['$http', function($http){
   // post the new mood
   this.createMood = function(){
     console.log(this);
-    controller.current_user_happiness.push({
-      happiness: this.happiness
-    });
+    controller.current_user_happiness.push(this.newHappiness);
 
   // post to /moods
   $http.post('/moods', {
     authenticity_token: authenticity_token,
-    mood: {
-      happiness: this.happiness
-    }
+    happiness: this.newHappiness
   }).success(function(data){
     controller.getMood();
   });
@@ -68,6 +64,7 @@ app.controller('FactorController', ['$http', '$scope', function($http, $scope){
 
   // call in the authenticity token
   var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
 
   // blurb string
   this.blurb = '';

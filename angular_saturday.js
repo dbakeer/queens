@@ -29,33 +29,33 @@ app.controller('MoodController', ['$http', function($http){
 
   // value of happiness determined by emoji picked; default is null
   this.happiness = null;
-  // this.newHappiness = null;
+  this.current_user_happiness = null;
 
-  // gets mood data and adds to the controller
-  this.getMood = function (){
+
+  // get the happiness value for current user
+  this.getMood = function(){
     $http.get('/moods').success(function(data){
       controller.current_user_happiness = data.happiness;
     });
   };
 
-  // fetching mood data
+  // fetching happiness data
   this.getMood();
 
-  // create a new mood
-  this.createMood = function (){
-    controller.current_user_happiness.push({
-      happiness: this.happiness
-    });
+  // post the new mood
+  this.createMood = function(){
+    console.log(this);
+    controller.current_user_happiness.push(this.newHappiness);
 
-    $http.post('/moods', {
-      authenticity_token: authenticity_token,
-      happiness: this.happiness
-    }).success(function(data){
-      controller.current_user_happiness.pop();
-      controller.current_user_happiness.push(data.happiness);
-      controller.getMood();
-    });
+  // post to /moods
+  $http.post('/moods', {
+    authenticity_token: authenticity_token,
+    happiness: this.newHappiness
+  }).success(function(data){
+    controller.getMood();
+  });
   };
+
 }]);
 
 // ////////////////////////////////////////
