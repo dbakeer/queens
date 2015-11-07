@@ -43,7 +43,6 @@ app.controller('MoodController', ['$http', function($http){
 
   // post the new mood
   this.createMood = function(){
-    console.log(this);
     controller.current_user_happiness.push(this.happiness);
 
   // post to /moods
