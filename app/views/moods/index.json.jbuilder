@@ -9,6 +9,6 @@ json.moods(@moods) do |mood|
     json.id fact.id
     json.blurb fact.blurb
     json.attachment fact.attachment
-    json.occured_at fact.occured_at
+    json.occurred_at fact.occurred_at
   end
 end
