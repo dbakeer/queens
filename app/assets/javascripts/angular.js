@@ -31,6 +31,10 @@ app.controller('MoodController', ['$http', '$scope', function($http, $scope){
   // value of happiness determined by emoji picked; default is null
   this.happiness = null;
 
+  this.factors[factors.length] = {
+    "blurb": blurb
+  };
+
 
   // get the happiness value for current user
   this.getMood = function(){
@@ -68,28 +72,45 @@ app.controller('MoodController', ['$http', '$scope', function($http, $scope){
 ////////////////////////////////////////
 /////////// FACTOR CONTROLLER //////////
 ////////////////////////////////////////
-// app.controller('FactorController', ['$http', '$scope', function($http, $scope){
-//
-//   // call in the authenticity token
-//   var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-//
-//   $scope.factors.blurb = '';
-//
-//   // post the new factor
-//   this.createFactor = function(){
-//
-//   $scope.mood.factors.push($scope.blurb);
-//
-//   $http.post('/moods', {
-//     authenticity_token: authenticity_token,
-//     factors: {
-//       blurb: this.blurb
-//     }
-//   }).success(function(data){
-//     $scope.$parent.mood.getMood();
-//   });
-//   };
-// }]);
+app.controller('FactorController', ['$http', '$scope', function($http, $scope){
+
+  // call in the authenticity token
+  var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+
+  $scope.blurb = "";
+
+
+  this.getFactor = function(){
+    $http.get('/moods/'+$scope.$parent.factors.id+'/factors').success(function(data){
+      controller.current_user_factors = data.moods;
+    });
+  };
+
+  this.getFactor();
+
+  // post the new mood
+  this.createFactor = function(){
+
+    controller.current_user_factors.push.length({
+      blurb: this.blurb,
+      id: this.id
+    });
+
+  // post to /moods
+  $http.post('/moods/'+$scope.$parent.factors.id+'/factors', {
+    authenticity_token: authenticity_token,
+    factors: {
+      blurb: this.blurb,
+      id: this.id
+    }
+  }).success(function(data){
+    controller.current_user_factors.pop();
+    controller.current_user_factors.push(data.factors);
+    controller.getFactor();
+  });
+  };
+}]);
 
 
 
