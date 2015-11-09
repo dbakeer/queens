@@ -1,7 +1,43 @@
 ////////////////////////////////////////
 /////////// MOOD APPLICATION ///////////
 ////////////////////////////////////////
-var app = angular.module('moodApp', []);
+var app = angular.module('moodApp', ['ngResource']);
+
+
+////////////////////////////////////////
+/////////////// ROUTING ////////////////
+////////////////////////////////////////
+app.config(['$routeProvider', '$locationProvider',
+  function($routeProvider, $locationProvider){
+    $locationProvider.html5mode(true);
+    $routeProvider
+      .when('/factors', {
+        templateUrl: '<%= new_mood_factor('moods/enter-factors.html') %>',
+        controller: 'MoodController'
+  })
+      .otherwise({
+        redirectTo: '/'
+      });
+}]);
+
+
+// app.config([‘$routeProvider, $locationProvider) {
+//   $locationProvider.html5Mode(true);
+//   $routeProvider
+//     .when("/contacts",
+//       { templateUrl: "<%= asset_path('contacts/index.html') %> ",
+//         controller: "ContactsIndexCtrl" })
+//     .when("/contacts/new",
+//       { templateUrl: "<%= asset_path('contacts/edit.html') %> ",
+//         controller: "ContactsEditCtrl" })
+//     .when("/contacts/:id",
+//       { templateUrl: "<%= asset_path('contacts/show.html') %> ",
+//         controller: "ContactsShowCtrl" })
+//     .when("/contacts/:id/edit",
+//       { templateUrl: "<%= asset_path('contacts/edit.html') %> ",
+//         controller: "ContactsEditCtrl" })
+//     .otherwise({ redirectTo: "/contacts" });
+// });
 
 
 ////////////////////////////////////////
@@ -86,83 +122,3 @@ app.controller('MoodController', ['$http', function($http){
  });
 }
 }]);
-
-
-// ////////////////////////////////////////
-// /////////// FACTOR CONTROLLER //////////
-// ////////////////////////////////////////
-
-// app.controller('FactorController', ['$http', '$scope', function($http, $scope){
-
-// //   // call in the authenticity token
-//   var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-//   var controller = this;
-
-// // this.getFactor = function(){
-// //    $http.get('/factors').success(function(data){
-// //     controller.current_user_moods.push({
-// //       factor: {
-// //         blurb: this.blurb
-// //       }
-// //     });
-// //   })
-// //   }
-
-//   // // fetching happiness data
-//   // this.getFactor();
-
-//   // post the new factor
-
-//   this.createFactor = function(){
-//     console.log("this worked");
-
-//   //  $http.post('/moods/'+mood.id +'/', {
-//   //    authenticity_token: authenticity_token,
-//   //    factors: {
-//   //      blurb: this.factor_blurb
-//   //    }
-//   //  }).success(function(data){
-//   //   controller.data.mood.factors.push()
-//   //   console.log($scope)
-//   //  $scope.$parent.mood.getMood();  //This line matches what is in scope
-//   // // });
-//   // });
-// }
-// }]);
-
-
-////////////////////////////////////////
-/////////////// ROUTING ////////////////
-////////////////////////////////////////
-// app.config(['$routeProvider', '$locationProvider',
-//   function($routeProvider, $locationProvider){
-//     $locationProvider.html5mode(true);
-//     $routeProvider
-//       .when('/home', {
-//         templateUrl: '/views/home.html.erb',
-//         controller: 'MoodController'
-//   })
-//       .otherwise({
-//         redirectTo: '/'
-//       });
-// }]);
-
-
-// app.config([‘$routeProvider, $locationProvider) {
-//   $locationProvider.html5Mode(true);
-//   $routeProvider
-//     .when("/contacts",
-//       { templateUrl: "<%= asset_path('contacts/index.html') %> ",
-//         controller: "ContactsIndexCtrl" })
-//     .when("/contacts/new",
-//       { templateUrl: "<%= asset_path('contacts/edit.html') %> ",
-//         controller: "ContactsEditCtrl" })
-//     .when("/contacts/:id",
-//       { templateUrl: "<%= asset_path('contacts/show.html') %> ",
-//         controller: "ContactsShowCtrl" })
-//     .when("/contacts/:id/edit",
-//       { templateUrl: "<%= asset_path('contacts/edit.html') %> ",
-//         controller: "ContactsEditCtrl" })
-//     .otherwise({ redirectTo: "/contacts" });
-// });
