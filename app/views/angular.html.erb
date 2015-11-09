@@ -188,6 +188,31 @@
 <!-- This shows array w id, happiness , created_at, empty factors  -->
 <!-- {{mood.current_user_moods}} </p>-->
 
+<<<<<<< HEAD
+=======
+    Happiness level out of 10: {{m.happiness}}, as of
+    {{m.created_at | date:'MM/dd/yyyy @ h:mma' }} <br/>
+    ID number is: {{m.id}}  <br/>
+    Factors include: 
+    <br/>
+      <ul> 
+          <li ng-repeat="factor in m.factors">
+            Blurb: {{factor.blurb}}, 
+            Time Occurred: {{factor.created_at}}
+          </li>
+      </ul>
+
+  <div ng-controller="FactorController as factor">
+
+    <form ng-submit=factor.createFactor()>
+       <input type="text" placeholder="enter new factor here" ng-model="factor.newblurb">
+       <input type="submit" value="new factor here">
+    </form>
+  </li>
+
+  </div>
+</ul>
+>>>>>>> 81dc8ebe5bc9298ce714fded220b15cf250465a4
 
 
 
