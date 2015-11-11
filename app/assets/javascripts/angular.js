@@ -96,13 +96,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         controllerAs: 'mood'
     // SHOW ONE MOOD
   }).when('/moods/:mood_id',
-      { controller:  'MoodController',
-        controllerAs: 'mood',
-        templateUrl: '/angular_templates/show.html'
-
+      { templateUrl: '/angular_templates/show.html',
+        controller:  'MoodController',
+        controllerAs: 'mood'
     // USER PROFILE PAGE
     }).when('/users/:id',
-      { templateUrl: '/angular_templates/user.html',   ///SHOW ONE PAGE
+      { templateUrl: '/angular_templates/user.html',
         controller:  'HeaderController',
         controllerAs: 'header'
     }).otherwise(
