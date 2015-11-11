@@ -22,6 +22,10 @@ before_action :require_current_user
     end
   end
 
+  def show
+    @mood = Mood.find(params[:id])
+    respond_with @mood
+  end
 
 def edit
   @mood = Mood.find(params[:id])

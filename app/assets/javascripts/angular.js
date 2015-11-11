@@ -77,6 +77,23 @@ app.controller('MoodController', ['$http', function($http){
 }]);
 
 
+// so we can get this post!
+app.controller('MoodDetailCtrl', ['$http', '$scope', function($http, $scope){
+  // authenticity token
+  var authenticity_token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  this.getMoodDeets = function(){
+    $http.get('/moods'+$scope.$parent.mood.id, {
+      authenticity_token: authenticity_token,
+      happiness: this.happiness,
+      blurb: this.factorsBlurb
+    }).success(function(data){
+      $scope.$parent.mood.getMood();
+    });
+  };
+}]);
+
+
 ////////////////////////////////////////
 /////////// ROUTE CONTROLLER ///////////
 ////////////////////////////////////////
@@ -96,12 +113,13 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
         controllerAs: 'mood'
     // SHOW ONE MOOD
   }).when('/moods/:mood_id',
-      { templateUrl: '/angular_templates/show.html',
-        controller:  'MoodController',
-        controllerAs: 'mood'
+      { controller:  'MoodDetailCtrl',
+        controllerAs: 'mood',
+        templateUrl: '/angular_templates/show.html'
+
     // USER PROFILE PAGE
     }).when('/users/:id',
-      { templateUrl: '/angular_templates/user.html',
+      { templateUrl: '/angular_templates/user.html',   ///SHOW ONE PAGE
         controller:  'HeaderController',
         controllerAs: 'header'
     }).otherwise(
